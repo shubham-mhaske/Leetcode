@@ -1,32 +1,17 @@
-# Last updated: 8/17/2025, 5:02:55 PM
+# Last updated: 8/17/2025, 5:36:01 PM
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        #selection sort
+
+        for i in range(len(nums)):
+            min_i  = i
+            for j in range(i+1,len(nums)):
+                if nums[j]<nums[min_i]:
+                    min_i = j
+            if min_i != i:
+                nums[i],nums[min_i] = nums[min_i],nums[i]
+               
         
-        start = 0
-        end = len(nums)-1
-        '''
-        while start<=end:
-            mid = int(start + (end-start)/2)
-            if nums[mid] == target:
-                return mid
-            if nums[mid]> target:
-                end = mid-1
-            else:
-                start = mid+1
-        return -1
-        '''
-
-        #recursive
-        return self.recursive_search(nums,target,start,end)
-
-    def recursive_search(self,nums:List[int],target:int,start:int,end:int) -> int:
-        mid = int(start+ (end-start)/2)
-        if start>end:
-            return -1
-        if nums[mid] == target:
-            return mid
-        if target<nums[mid]:
-            end = mid-1
-        else:
-            start = mid+1
-        return self.recursive_search(nums,target,start,end)
