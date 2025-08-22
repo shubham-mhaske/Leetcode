@@ -1,18 +1,19 @@
-# Last updated: 8/21/2025, 3:00:09 PM
+# Last updated: 8/21/2025, 7:34:37 PM
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        N = len(prices)
-        max_profit = 0
-        if N<=1:
-            return max_profit
-        L,R = 0,1
-        while R<N:
-            profit = prices[R] - prices[L]
-            if profit<=0:
-                L=R    
-            elif profit>max_profit:
-                max_profit = profit
-            R+=1
-        return max_profit
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        #prefix loop
+        n = len(nums)
+        prefix = 1
+        output = [0]*n
         
+        for i in range(n):
+            output[i] = prefix
+            prefix = prefix*nums[i]
+        
+        #postfix
+        postfix = 1
+        for i in range(n-1,-1,-1):
+            output[i]*=postfix
+            postfix = postfix * nums[i]
+        return output
         
